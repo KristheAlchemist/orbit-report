@@ -1,34 +1,41 @@
 package org.javaportfolio.quizapp.models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @MappedSuperclass
 public abstract class AbstractUser {
 
-    @NotNull(message="First name is required.")
-    @NotBlank(message="First name is required.")
-    @Size(max=22, message="First name is too long")
-    private String firstName;
+    @Id
+    @GeneratedValue
+    private int userId;
 
-    @NotNull(message="Last name is required.")
-    @NotBlank(message="Last name is required.")
-    @Size(max=22, message="Last name is too long")
-    private String lastName;
+    @NotNull
+    protected String firstName;
 
-    @NotNull(message="Username is required.")
-    @NotBlank(message="Username is required.")
-    @Size(max=22, message="Username is too long")
-    private String userName;
+    @NotNull
+    protected String lastName;
 
-    @NotNull(message="At least one course is required.")
-    @NotBlank(message="At least one course is required.")
-    @Size(max=22, message="Course name is too long")
-    private List<String> courses = new ArrayList<>();
+    @NotNull
+    protected String email;
+
+    @NotNull
+    protected String pwHash;
+
+    protected static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+//    @NotNull(message="At least one course is required.")
+//    @NotBlank(message="At least one course is required.")
+//    @Size(max=22, message="Course name is too long")
+//    private List<String> courses = new ArrayList<>();
+
+    public int getUserId() {
+        return userId;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -46,19 +53,20 @@ public abstract class AbstractUser {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public List<String> getCourses() {
-        return courses;
-    }
+//    public List<String> getCourses() {
+//        return courses;
+//    }
+//
+//    public void setCourses(List<String> courses) {
+//        this.courses = courses;
+//    }
 
-    public void setCourses(List<String> courses) {
-        this.courses = courses;
-    }
 }

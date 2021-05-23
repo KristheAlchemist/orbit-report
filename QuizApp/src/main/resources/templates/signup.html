@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <h1 th:text="${heading}"></h1>
+    <div>
+        <p>If you already have an account, click <a href="/login">here</a>.</p>
+    </div>
+    <form method="post">
+        <div>
+            <label th:for="firstName">First Name</label>
+            <input th:field="${registerFormDTO.firstName}"/>
+            <span th:errors="${registerFormDTO.firstName}"></span>
+        </div>
+        <div>
+            <label th:for="lastName">Last Name</label>
+            <input th:field="${registerFormDTO.lastName}"/>
+            <span th:errors="${registerFormDTO.lastName}"></span>
+        </div>
+        <div>
+            <label th:for="email">Email Address</label>
+            <input th:field="${registerFormDTO.email}"/>
+            <span th:errors="${registerFormDTO.email}"></span>
+        </div>
+        <div>
+            <label th:for="password">Password</label>
+            <input type="password" th:field="${registerFormDTO.password}"/>
+            <span th:errors="${registerFormDTO.password}"></span>
+        </div>
+        <div>
+            <label th:for="verifyPassword">Verify Password</label>
+            <input type="password" th:field="${registerFormDTO.verifyPassword}"/>
+            <span th:errors="${registerFormDTO.verifyPassword}"></span>
+        </div>
+        <input type="submit" value="Sign Up">
+    </form>
+</body>
+</html>

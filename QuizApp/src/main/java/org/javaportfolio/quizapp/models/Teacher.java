@@ -1,17 +1,20 @@
 package org.javaportfolio.quizapp.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Entity;
 
+@Entity
 public class Teacher extends AbstractUser {
-
-    @Id
-    @GeneratedValue
-    private int teacherId;
 
     public Teacher() {};
 
-    public int getTeacherId() {
-        return teacherId;
+    public Teacher(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.pwHash = encoder.encode(password);
+    }
+
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, pwHash);
     }
 }
